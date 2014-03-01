@@ -1,0 +1,7 @@
+parameters:
+#    site_utility.example.class: Site\UtilityBundle\Example
+
+services:
+#    site_utility.example:
+#        class: %site_utility.example.class%
+#        arguments: [@service_id, "plain_value", %parameter%]
