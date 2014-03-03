@@ -1,7 +1,14 @@
-parameters:
-#    site_utility.example.class: Site\UtilityBundle\Example
-
 services:
-#    site_utility.example:
-#        class: %site_utility.example.class%
-#        arguments: [@service_id, "plain_value", %parameter%]
+
+## -- Encoders -- ##
+	yan.encoder.json_field:
+		class: Site\UtilityBundle\Encoder\JsonFieldEncoder
+
+	yan.encoder.twitter_handler:
+		class: Site\UtilityBundle\Encoder\TwitterHandlerEncoder
+
+## -- Twig Extensions -- ##
+    yan.twig.extension.english:
+        class: Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension
+        tags:
+            - { name: twig.extension }
