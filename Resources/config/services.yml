@@ -1,11 +1,11 @@
 services:
 
 ## -- Encoders -- ##
-	yan.encoder.json_field:
-		class: Site\UtilityBundle\Encoder\JsonFieldEncoder
+    yan.encoder.json_field:
+        class: Site\UtilityBundle\Encoder\JsonFieldEncoder
 
-	yan.encoder.twitter_handler:
-		class: Site\UtilityBundle\Encoder\TwitterHandlerEncoder
+    yan.encoder.twitter_handler:
+        class: Site\UtilityBundle\Encoder\TwitterHandlerEncoder
 
 ## -- Twig Extensions -- ##
     yan.twig.extension.english:
