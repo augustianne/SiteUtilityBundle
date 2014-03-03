@@ -13,5 +13,5 @@
             "Site\\UtilityBundle" : ""
         }
     },
-    "target-dir" : "src"
+    "target-dir" : "Site/UtilityBundle"
 }
