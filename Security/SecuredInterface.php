@@ -1,6 +1,6 @@
 <?php
 
-namespace Site\UtilityBundle\Service\Security;
+namespace Site\UtilityBundle\Security;
 
 interface SecuredInterface
 {
