@@ -15,3 +15,8 @@ services:
         class: Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension
         tags:
             - { name: twig.extension }
+
+    yan.twig.extension.date_and_time:
+        class: Site\UtilityBundle\Twig\Extension\DateAndTimeExtension
+        tags:
+            - { name: twig.extension }
