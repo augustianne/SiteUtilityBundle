@@ -62,8 +62,10 @@ class EnglishGrammarExtension extends Twig_Extension
         if ($quantity > 1) {
             // words ending in is change to es
             $noun = preg_replace('/(\w*)(is)$/', '$1es', $noun);
+            // add s if word ends in vowel+y
+            $noun = preg_replace('/[aeiou]+y$/', '$0s', $noun);
             // change y to i and add es
-            $noun = preg_replace('/(\w*)y$/', '$1ies', $noun);
+            $noun = preg_replace('/([b-d,f-h,j-n,p-t,v-z]+)y$/', '$1ies', $noun);
             // words ending in z add zes
             $noun = preg_replace('/(\w*)(z)$/', '$0zes', $noun);
 

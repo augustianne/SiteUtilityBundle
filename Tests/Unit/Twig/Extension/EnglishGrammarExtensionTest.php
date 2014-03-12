@@ -29,224 +29,94 @@ class EnglishGrammarExtensionTest extends \PHPUnit_Framework_TestCase
 		$this->sut = new EnglishGrammarExtension();
 	}
 
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::toPossessive
-     */
-	public function testToPossessiveReturnsApostropheIfStringEndsInS()
+	public function toPossessiveProvider()
 	{
-		$this->assertEquals("carcass'", $this->sut->toPossessive("carcass"));
+		return array(
+			array("carcass", "carcass'"),
+			array("manager", "manager's"),
+			array("Birch", "Birch's"),
+			array("Sanchez", "Sanchez's"),
+			array("Williams", "Williams'")
+		);
 	}
 
 	/**
      * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::toPossessive
+     * @dataProvider toPossessiveProvider
      */
-	public function testToPossessiveReturnsApostropheSIfStringDoesNotEndInS()
+	public function testToPossessive($noun, $result)
 	{
-		$this->assertEquals("manager's", $this->sut->toPossessive("manager"));
+		$this->assertEquals($result, $this->sut->toPossessive($noun));
+	}
+
+	public function quantifyNounProvider()
+	{
+		return array(
+			array("class", "classes", null),
+			array("glass", "glasses", null),
+			array("church", "churches", null),
+			array("box", "boxes", null),
+			array("crush", "crushes", null),
+			array("bush", "bushes", null),
+			array("bully", "bullies", null),
+			array("country", "countries", null),
+			array("baby", "babies", null),
+			array("body", "bodies", null),
+			array("memory", "memories", null),
+			array("sky", "skies", null),
+			array("day", "days", null),
+			array("boy", "boys", null),
+			array("journey", "journeys", null),
+			array("key", "keys", null),
+			array("tray", "trays", null),
+			array("thesis", "theses", null),
+			array("parenthesis", "parentheses", null),
+			array("quiz", "quizzes", null),
+			array("dog", "dogs", null),
+			array("cat", "cats", null),
+			array("man", "men", "men")
+		);
 	}
 
 	/**
      * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
+     * @dataProvider quantifyNounProvider
      */
-	public function testQuantifyNounAppendEsIfStringEndsInS()
+	public function testQuantifyNoun($noun, $plural, $alternate)
 	{
-		$this->assertEquals("class", $this->sut->quantifyNoun("class"));
-		$this->assertEquals("classes", $this->sut->quantifyNoun("class", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounAppendEsIfStringEndsInCh()
-	{
-		$this->assertEquals("church", $this->sut->quantifyNoun("church"));
-		$this->assertEquals("churches", $this->sut->quantifyNoun("church", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounAppendEsIfStringEndsInX()
-	{
-		$this->assertEquals("box", $this->sut->quantifyNoun("box"));
-		$this->assertEquals("boxes", $this->sut->quantifyNoun("box", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounAppendEsIfStringEndsInSh()
-	{
-		$this->assertEquals("crush", $this->sut->quantifyNoun("crush"));
-		$this->assertEquals("crushes", $this->sut->quantifyNoun("crush", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounChangeYToIAndAddEsIfStringEndsInY()
-	{
-		$this->assertEquals("bully", $this->sut->quantifyNoun("bully"));
-		$this->assertEquals("bullies", $this->sut->quantifyNoun("bully", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounChangeToEsIfStringEndsInIs()
-	{
-		$this->assertEquals("thesis", $this->sut->quantifyNoun("thesis"));
-		$this->assertEquals("theses", $this->sut->quantifyNoun("thesis", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounAddZesIfStringEndsInZ()
-	{
-		$this->assertEquals("quiz", $this->sut->quantifyNoun("quiz"));
-		$this->assertEquals("quizzes", $this->sut->quantifyNoun("quiz", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounAddSIfStringDoesNotNeedSpecialPluralization()
-	{
-		$this->assertEquals("dog", $this->sut->quantifyNoun("dog"));
-		$this->assertEquals("dogs", $this->sut->quantifyNoun("dog", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::quantifyNoun
-     */
-	public function testQuantifyNounUseAlternatePlural()
-	{
-		$this->assertEquals("man", $this->sut->quantifyNoun("man"));
-		$this->assertEquals("men", $this->sut->quantifyNoun("man", 2, 'men'));
+		$this->assertEquals($noun, $this->sut->quantifyNoun($noun));
+		$this->assertEquals($plural, $this->sut->quantifyNoun($noun, 2, $alternate));
 	}
 
 	/**
      * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
+     * @dataProvider quantifyNounProvider
      */
-	public function testFormatPluralAppendEsIfStringEndsInS()
+	public function testFormatPlural($noun, $plural, $alternate)
 	{
-		$this->assertEquals("1 class", $this->sut->formatPlural("class"));
-		$this->assertEquals("2 classes", $this->sut->formatPlural("class", 2));
+		$this->assertEquals("1 $noun", $this->sut->formatPlural($noun));
+		$this->assertEquals("2 $plural", $this->sut->formatPlural($noun, 2, $alternate));
+		$this->assertEquals("No $plural", $this->sut->formatPlural($noun, 0, $alternate, "No $plural"));
 	}
 
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralAppendEsIfStringEndsInCh()
+	public function verbTenseProvider()
 	{
-		$this->assertEquals("1 church", $this->sut->formatPlural("church"));
-		$this->assertEquals("2 churches", $this->sut->formatPlural("church", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralAppendEsIfStringEndsInX()
-	{
-		$this->assertEquals("1 box", $this->sut->formatPlural("box"));
-		$this->assertEquals("2 boxes", $this->sut->formatPlural("box", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralAppendEsIfStringEndsInSh()
-	{
-		$this->assertEquals("1 crush", $this->sut->formatPlural("crush"));
-		$this->assertEquals("2 crushes", $this->sut->formatPlural("crush", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralChangeYToIAndAddEsIfStringEndsInY()
-	{
-		$this->assertEquals("1 bully", $this->sut->formatPlural("bully"));
-		$this->assertEquals("2 bullies", $this->sut->formatPlural("bully", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralChangeToEsIfStringEndsInIs()
-	{
-		$this->assertEquals("1 thesis", $this->sut->formatPlural("thesis"));
-		$this->assertEquals("2 theses", $this->sut->formatPlural("thesis", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralAddZesIfStringEndsInZ()
-	{
-		$this->assertEquals("1 quiz", $this->sut->formatPlural("quiz"));
-		$this->assertEquals("2 quizzes", $this->sut->formatPlural("quiz", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralAddSIfStringDoesNotNeedSpecialPluralization()
-	{
-		$this->assertEquals("1 dog", $this->sut->formatPlural("dog"));
-		$this->assertEquals("2 dogs", $this->sut->formatPlural("dog", 2));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralUseAlternatePlural()
-	{
-		$this->assertEquals("1 man", $this->sut->formatPlural("man"));
-		$this->assertEquals("2 men", $this->sut->formatPlural("man", 2, 'men'));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::formatPlural
-     */
-	public function testFormatPluralUseEmptySubIfEmpty()
-	{
-		$this->assertEquals("No men", $this->sut->formatPlural("man", 0, 'men', 'No men'));
-		$this->assertEquals("1 man", $this->sut->formatPlural("man", 1, 'men', 'No men'));
-		$this->assertEquals("2 men", $this->sut->formatPlural("man", 2, 'men', 'No men'));
+		return array(
+			array("remove", "remove", date('Y-m-d H:i:s', strtotime('+1 day'))),
+			array("remove", "removed", date('Y-m-d H:i:s', strtotime('-1 day'))),
+			array("party", "partied", false),
+			array("deny", "denied", date('Y-m-d H:i:s', strtotime('-3 day'))),
+			array("blind", "blind", date('Y-m-d H:i:s', strtotime('+1 day')))
+		);
 	}
 
 	/**
      * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::verbTense
+     * @dataProvider verbTenseProvider
      */
-	public function testVerbTenseAddDIfWordEndsInE()
+	public function testVerbTense($verb, $result, $date)
 	{
-		$this->assertEquals("removed", $this->sut->verbTense("remove"));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::verbTense
-     */
-	public function testVerbTenseChangeYToIAndAddEdIfWordEndsInY()
-	{
-		$this->assertEquals("partied", $this->sut->verbTense("party"));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::verbTense
-     */
-	public function testVerbTenseAddEdIsAConsonantExceptD()
-	{
-		$this->assertEquals("blinded", $this->sut->verbTense("blind"));
-	}
-
-	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::verbTense
-     */
-	public function testVerbTenseReturnUnchangedIfCompareDateIsGreaterThanTodaysDate()
-	{
-		$this->assertEquals("blind", $this->sut->verbTense("blind", date('Y-m-d H:i:s', strtotime('+1 day'))));
+		$this->assertEquals($result, $this->sut->verbTense($verb, $date));
 	}
 
 }
