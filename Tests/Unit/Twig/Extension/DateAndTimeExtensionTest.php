@@ -51,13 +51,42 @@ class DateAndTimeExtensionTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 
+	public function getDateTimesWithPeriod()
+	{
+		return array(
+			array(new DateTime('+ 1 years'), 'y', '1'),
+			array(new DateTime('+ 2 years'), 'y', '2'),
+			array(new DateTime('+ 1 months'), 'm', '1'),
+			array(new DateTime('+ 2 months'), 'm', '2'),
+			array(new DateTime('+ 1 days'), 'd', '1'),
+			array(new DateTime('+ 2 days'), 'd', '2'),
+			array(new DateTime('+ 5 days'), 'd', '5'),
+			array(new DateTime('+ 1 hours'), 'h', '1'),
+			array(new DateTime('+ 2 hours'), 'h', '2'),
+			array(new DateTime('+ 1 minutes'), 'i', '1'),
+			array(new DateTime('+ 2 minutes'), 'i', '2'),
+			array(new DateTime('+ 1 seconds'), 's', '1'),
+			array(new DateTime('+ 2 seconds'), 's', '2'),
+			array(new DateTime('+ 2 seconds'), 'w', null)
+		);
+	}
+
 	/**
-     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::toPossessive
+     * @covers Site\UtilityBundle\Twig\Extension\DateAndTimeExtension::countdown
      * @dataProvider getDateTimes
      */
 	public function testCountdown($date, $result)
 	{
 		$this->assertEquals($result, $this->sut->countdown($date));
+	}
+
+	/**
+     * @covers Site\UtilityBundle\Twig\Extension\DateAndTimeExtension::countdown
+     * @dataProvider getDateTimesWithPeriod
+     */
+	public function testCountdownWherePeriodIsPassed($date, $period, $result)
+	{
+		$this->assertEquals($result, $this->sut->countdown($date, $period));
 	}
 
 }
