@@ -10,6 +10,10 @@ services:
     yan.encoder.twitter_handler:
         class: Site\UtilityBundle\Encoder\TwitterHandlerEncoder
 
+## -- Generators -- ##
+    yan.generator.random_character:
+        class: Site\UtilityBundle\Generator\RandomCharacterGenerator
+
 ## -- Twig Extensions -- ##
     yan.twig.extension.english:
         class: Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension
