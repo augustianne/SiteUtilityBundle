@@ -63,7 +63,7 @@ class RandomCharacterGeneratorTest extends \PHPUnit_Framework_TestCase
 	public function testGenerateAlphanumeric($length, $type)
 	{
 		$randomString = $this->sut->generate($length, $type);
-		var_dump($randomString);
+		
 		$this->assertEquals($length, strlen($randomString));
 		$this->assertTrue(ctype_alnum($randomString));
 	}
@@ -75,20 +75,20 @@ class RandomCharacterGeneratorTest extends \PHPUnit_Framework_TestCase
 	public function testGenerateAlphanumericLowerCase($length, $type)
 	{
 		$randomString = $this->sut->generate($length, $type);
-		var_dump($randomString);
+		
 		$this->assertEquals(strtolower($randomString), $randomString);
 		$this->assertEquals($length, strlen($randomString));
 		$this->assertTrue(ctype_alnum($randomString));
 	}
 
-		/**
+	/**
      * @covers Site\UtilityBundle\Generator\RandomCharacterGenerator::generate
      * @dataProvider getInputUpperCase
      */
 	public function testGenerateAlphanumericUpperCase($length, $type)
 	{
 		$randomString = $this->sut->generate($length, $type);
-		var_dump($randomString);
+		
 		$this->assertEquals(strtoupper($randomString), $randomString);
 		$this->assertEquals($length, strlen($randomString));
 		$this->assertTrue(ctype_alnum($randomString));
