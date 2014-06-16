@@ -1,6 +1,9 @@
 services:
 
 ## -- Encoders -- ##
+    yan.encoder.fullname:
+        class: Site\UtilityBundle\Encoder\FullnameEncoder
+
     yan.encoder.json_field:
         class: Site\UtilityBundle\Encoder\JsonFieldEncoder
 
