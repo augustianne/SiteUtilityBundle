@@ -119,4 +119,27 @@ class EnglishGrammarExtensionTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals($result, $this->sut->verbTense($verb, $date));
 	}
 
+	public function conjunctProvider()
+	{
+		return array(
+			array(array("me", "myself", "I"), "me, myself and I"),
+			array(array("Yan"), "Yan"),
+			array(array("Kristal", "Nick"), "Kristal and Nick"),
+			array(array("Naldz", "Giging", "Logan"), "Naldz, Giging and Logan"),
+			array(array("Naldz", "Giging", "Logan", "Nick", "Kristal", "Yan", "Yen"), "Naldz, Giging, Logan, Nick, Kristal, Yan and Yen"),
+			array(array("Daf", "Thea"), "Daf and Thea"),
+			array(array("Jikky"), "Jikky"),
+		);
+	}
+
+	/**
+     * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::joinWords
+     * @dataProvider conjunctProvider
+     */
+	public function testConjunct($words, $result)
+	{
+		$this->assertEquals($result, $this->sut->conjunct($words));
+	}
+
+
 }

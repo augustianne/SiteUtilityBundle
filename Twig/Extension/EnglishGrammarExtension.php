@@ -32,7 +32,8 @@ class EnglishGrammarExtension extends Twig_Extension
             'to_possessive' => new \Twig_Function_Method($this, 'toPossessive'),
             'quantify_noun' => new \Twig_Function_Method($this, 'quantifyNoun'),
             'format_plural' => new \Twig_Function_Method($this, 'formatPlural'),
-            'verb_tense' => new \Twig_Function_Method($this, 'verbTense')
+            'verb_tense' => new \Twig_Function_Method($this, 'verbTense'),
+            'conjunct' => new \Twig_Function_Method($this, 'conjunct')
         );
     }
 
@@ -125,6 +126,28 @@ class EnglishGrammarExtension extends Twig_Extension
         }
 
         return $verb;
+    }
+
+    /**
+     * Formats words into a grammatically correct conjunction of the given array of words
+     *
+     * @param String $words
+     * @return string grammatically formatted conjunction of the input
+     */
+    public function conjunct($words)
+    {
+        if (!is_array($words)) {
+            throw new Exception('Invalid input. Make sure you input an array of words');
+        }
+
+        if (count($words) == 1) {
+            return array_pop($words);  
+        }
+
+        $lastWord = array_pop($words);
+        $joinedWords = implode(', ', $words);
+
+        return sprintf("%s and %s", $joinedWords, $lastWord);
     }
 
     /**
