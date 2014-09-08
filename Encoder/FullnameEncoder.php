@@ -47,11 +47,11 @@ class FullnameEncoder
         }
 
         if ($format == self::FIRST_NAME_FIRST) {
-            preg_match('/([\w\s]+)(Jr\.|Sr\.|III|IV|V)/i', $firstName, $match);
-
-            if (!empty($match)) {
-                $lastName = sprintf("%s %s", $lastName, $match[2]);
-                $firstName = trim($match[1]);
+            preg_match_all('/([\w\s]+)((?:Sr\.|Jr\.|III|IV|V))$/i', $firstName, $match);
+            
+            if (isset($match[2][0])) {
+                $lastName = sprintf("%s %s", $lastName, $match[2][0]);
+                $firstName = trim($match[1][0]);
             }
 
             $fullName = sprintf("%s %s %s", $firstName, $middleName, $lastName);

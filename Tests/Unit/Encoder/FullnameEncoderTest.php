@@ -42,6 +42,9 @@ class FullnameEncoderTest extends \PHPUnit_Framework_TestCase
 				'Dominique Aguilos', 'Dominique', 'Aguilos', '', FullnameEncoder::FIRST_NAME_FIRST, FullnameEncoder::MIDDLE_NAME
 			),
 			array(
+				'Cheryl Ivy Go Ty', 'Cheryl Ivy', 'Ty', 'Go', FullnameEncoder::FIRST_NAME_FIRST, FullnameEncoder::MIDDLE_NAME
+			),
+			array(
 				'Barreta, Augustianne Laurenne Llevado', 'Augustianne Laurenne', 'Barreta', 'Llevado', FullnameEncoder::LAST_NAME_FIRST, FullnameEncoder::MIDDLE_NAME
 			),
 			array(
@@ -49,6 +52,9 @@ class FullnameEncoderTest extends \PHPUnit_Framework_TestCase
 			),
 			array(
 				'Aguilos, Dominique', 'Dominique', 'Aguilos', '', FullnameEncoder::LAST_NAME_FIRST, FullnameEncoder::MIDDLE_NAME
+			),
+			array(
+				'Ty, Cheryl Ivy Go', 'Cheryl Ivy', 'Ty', 'Go', FullnameEncoder::LAST_NAME_FIRST, FullnameEncoder::MIDDLE_NAME
 			),
 		);
 	}
@@ -66,6 +72,9 @@ class FullnameEncoderTest extends \PHPUnit_Framework_TestCase
 				'Dominique Aguilos', 'Dominique', 'Aguilos', '', FullnameEncoder::FIRST_NAME_FIRST, FullnameEncoder::MIDDLE_INITIAL
 			),
 			array(
+				'Cheryl Ivy G. Ty', 'Cheryl Ivy', 'Ty', 'Go', FullnameEncoder::FIRST_NAME_FIRST, FullnameEncoder::MIDDLE_INITIAL
+			),
+			array(
 				'Barreta, Augustianne Laurenne L.', 'Augustianne Laurenne', 'Barreta', 'Llevado', FullnameEncoder::LAST_NAME_FIRST, FullnameEncoder::MIDDLE_INITIAL
 			),
 			array(
@@ -74,6 +83,9 @@ class FullnameEncoderTest extends \PHPUnit_Framework_TestCase
 			array(
 				'Aguilos, Dominique', 'Dominique', 'Aguilos', '', FullnameEncoder::LAST_NAME_FIRST, FullnameEncoder::MIDDLE_INITIAL
 			),
+			array(
+				'Ty, Cheryl Ivy G.', 'Cheryl Ivy', 'Ty', 'Go', FullnameEncoder::LAST_NAME_FIRST, FullnameEncoder::MIDDLE_INITIAL
+			)
 		);
 	}
 
