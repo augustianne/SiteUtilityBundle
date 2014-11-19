@@ -27,7 +27,7 @@ class SlugEncoder
      * @param String $postfix [optional] - text to append to the slug after creation
      * @return String - slug, a url friendly string
      */
-    public function encode($text, $prefix = '', $postfix = '')
+    public function encode($text, $prefix = '', $postfix = '', $excludedWords = array())
     {
         // transliterate
         if (function_exists('iconv')) {
@@ -46,6 +46,20 @@ class SlugEncoder
 
         // replace non letter or digits with separator
         $text = preg_replace('/[^\\pL\\d]+/u', '-', $text);
+
+        if (!empty($excludedWords)) {
+            // append - at start and end of every slug component, as delimiter for whole words
+            $text = '-'.preg_replace("/-/u", '--', $text).'-';
+
+            // create pattern for regex
+            $pattern = '-'.implode('-|-',$excludedWords).'-';
+
+            // remove excluded words to shorten url
+            $text = preg_replace("/$pattern/u", '', $text);
+
+            // revert remaining -- to -
+            $text = preg_replace("/--/u", '-', $text);
+        }
 
         // trim
         $text = trim($text, '-');
