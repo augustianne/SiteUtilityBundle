@@ -42,7 +42,7 @@ class SlugEncoder
         }
 
         // remove accents resulting from OSX's iconv
-        $text = str_replace(array('\'', '`', '^'), '', $text);
+        $text = str_replace(array('\'', '`', '^', '"'), '', $text);
 
         // replace non letter or digits with separator
         $text = preg_replace('/[^\\pL\\d]+/u', '-', $text);

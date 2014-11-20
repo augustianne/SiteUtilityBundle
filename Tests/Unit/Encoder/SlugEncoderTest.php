@@ -67,8 +67,8 @@ class SlugEncoderTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeStringsWithNonAlphaNumericCharacters()
     {
-        $this->assertEquals('this-is-a-string', $this->sut->encode('this-is a-string'), 'Slugify is unable to handles strings with dashes.');
-        $this->assertEquals('this-is-a-string', $this->sut->encode('this#$@is/\a-!.%^()_+=~`string Würth'), 'Slugify is unable to handle strings with non alpha numeric characters.');
+        $this->assertEquals('this-is-a-string', $this->sut->encode('this-is a-string'), 'Slugify is unable to handle strings with dashes.');
+        $this->assertEquals('this-is-a-string', $this->sut->encode('this#$@is/\a-!.%^()_+=~`string'), 'Slugify is unable to handle strings with non alpha numeric characters.');
     }
     
     /**
