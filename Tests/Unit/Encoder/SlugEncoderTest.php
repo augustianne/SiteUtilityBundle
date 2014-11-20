@@ -67,8 +67,8 @@ class SlugEncoderTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeStringsWithNonAlphaNumericCharacters()
     {
-        $this->assertEquals('this-is-a-string', $this->sut->encode('this-is a-string'), 'Slugify is unable to handles strings with dashes.');
-        $this->assertEquals('this-is-a-string', $this->sut->encode('this#$@is/\a-!.%^()_+=~`string'), 'Slugify is unable to handles strings with non alpha numeric characters.');
+        $this->assertEquals('this-is-a-string', $this->sut->encode('this-is a-string'), 'Slugify is unable to handle strings with dashes.');
+        $this->assertEquals('this-is-a-string', $this->sut->encode('this#$@is/\a-!.%^()_+=~`string'), 'Slugify is unable to handle strings with non alpha numeric characters.');
     }
     
     /**
@@ -76,7 +76,14 @@ class SlugEncoderTest extends \PHPUnit_Framework_TestCase
      */
     public function testEncodeStringsWithInvisibleCharacters()
     {
-        $this->assertEquals('this-is-a-string', $this->sut->encode("\t\tthis \nis\r\n a \nstring\n\t\r"), 'Slugify is unable to handles strings with dashes.');
+        $this->assertEquals('this-is-a-string', $this->sut->encode("\t\tthis \nis\r\n a \nstring\n\t\r"), 'Slugify is unable to handle strings with dashes.');
     }
+    
+    public function testEncodeStringsWithExcludedWords()
+    {
+        $excludedWords = array( "a", "an", "as", "at", "but", "by", "for", "from", "is", "in", "of", "on", "onto", "per", "since", "than", "that", "the", "this", "to", "via", "with");
+        $testString = "this is a string with excluded words including ".implode(', ',$excludedWords);
 
+        $this->assertEquals('string-excluded-words-including', $this->sut->encode($testString, '', '', $excludedWords) , 'Slugify is unable to handle strings with a set of excluded words.');
+    }
 }
