@@ -82,8 +82,9 @@ class SlugEncoderTest extends \PHPUnit_Framework_TestCase
     public function testEncodeStringsWithExcludedWords()
     {
         $excludedWords = array( "a", "an", "as", "at", "but", "by", "for", "from", "is", "in", "of", "on", "onto", "per", "since", "than", "that", "the", "this", "to", "via", "with");
-        $testString = "this is a string with excluded words including ".implode(', ',$excludedWords);
+        $testString = "this is a string with excluded words including ".implode(', ',$excludedWords)." and excluded words with all caps like AT and IS";
 
-        $this->assertEquals('string-excluded-words-including', $this->sut->encode($testString, '', '', $excludedWords) , 'Slugify is unable to handle strings with a set of excluded words.');
+        $this->assertEquals('string-excluded-words-including-and-excluded-words-all-caps-like-and', $this->sut->encode($testString, '', '', $excludedWords) , 'Slugify is unable to handle strings with a set of excluded words.');
+        $this->assertEquals('string-excluded-words-including-and-excluded-words-all-caps-like-at-and-is', $this->sut->encode($testString, '', '', $excludedWords, true) , 'Slugify is unable to retain words with all caps with flag set to true');
     }
 }
