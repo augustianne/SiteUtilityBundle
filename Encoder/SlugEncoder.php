@@ -18,20 +18,40 @@ namespace Site\UtilityBundle\Encoder;
 */
 class SlugEncoder
 {
-    
+
     /**
      * Encode text to be more url friendly
      *
      * @param String $text - text to be encoded
      * @param String $prefix [optional] - text to prepend the slug after creation
      * @param String $postfix [optional] - text to append to the slug after creation
+     * @param Array $excludedWords [optional] - array of words to remove from the slug
+     * @param boolean $retainAllCaps [optional] - prevent words with all uppercase letters from being excluded
      * @return String - slug, a url friendly string
      */
-    public function encode($text, $prefix = '', $postfix = '', $excludedWords = array())
+    public function encode($text, $prefix = '', $postfix = '', $excludedWords = array(), $retainAllCaps = false)
     {
         // transliterate
         if (function_exists('iconv')) {
             $text = iconv('utf-8', 'us-ascii//TRANSLIT', $text);
+        }
+
+        $basePlaceholder = 'autodealslugwildcard';
+        $placeholderValues = array();
+        if($retainAllCaps){
+            // find words with all uppercase letters
+            foreach (explode(' ', $text) as $word) {
+                if (ctype_upper(trim($word))) {
+                    $placeholderValues[$word] = $word;
+                }
+            }
+
+            $placeholderValues = array_values($placeholderValues);
+
+            // set placeholders
+            foreach ($placeholderValues as $key => $val) {
+                $text = preg_replace("/$val/u", $basePlaceholder.$key, $text);
+            }
         }
 
         // lowercase
@@ -68,11 +88,28 @@ class SlugEncoder
             return null;
         }
 
-        return $prefix.$text.$postfix;
+        // revert placeholders if any
+        if (!empty($placeholderValues)) {
+            foreach ($placeholderValues as $key => $val) {
+                $placeholder = $basePlaceholder.$key;
+                $text = preg_replace("/$placeholder/u", $val, $text);
+            }
+        }
+
+        $slug = $prefix.$text.$postfix;
+
+        // convert to lowercase any remaining uppercase letters
+        if (function_exists('mb_strtolower')) {
+            $slug = mb_strtolower($slug);
+        } else {
+            $slug = strtolower($slug);
+        }
+
+        return $slug;
     }
 
     public function decode()
     {}
-    
+
 
 }
