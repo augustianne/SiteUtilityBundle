@@ -41,7 +41,7 @@ class SlugEncoder
         if($retainAllCaps){
             // find words with all uppercase letters
             foreach (explode(' ', $text) as $word) {
-                if (ctype_upper(trim($word))) {
+                if (strlen(trim($word)) > 1 && ctype_upper(trim($word))) {
                     $placeholderValues[$word] = $word;
                 }
             }
