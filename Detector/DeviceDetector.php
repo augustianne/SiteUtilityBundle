@@ -146,4 +146,34 @@ class DeviceDetector
         // treat all other unidentified user agents as dektop
         return 'desktop';
     }
+
+    /**
+     * Checks if device is mobile
+     *
+     * @return boolean
+     */
+    public function isMobile()
+    {
+        return ('mobile' == $this->detect());
+    }
+
+    /**
+     * Checks if device is tablet
+     *
+     * @return boolean
+     */
+    public function isTablet()
+    {
+        return ('tablet' == $this->detect());
+    }
+
+    /**
+     * Checks if device is desktop
+     *
+     * @return boolean
+     */
+    public function isDesktop()
+    {
+        return ('desktop' == $this->detect());
+    }
 }

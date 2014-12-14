@@ -24,6 +24,46 @@ class Configuration implements ConfigurationInterface
         // configure your bundle. See the documentation linked above for
         // more information on that topic.
 
+        $rootNode
+            ->children()
+                ->arrayNode('device_detection')
+                    ->info('Device detection configuration')
+                    ->canBeEnabled()
+                    ->children()
+                        ->booleanNode('tablet_as_mobile')->defaultTrue()->end()
+                        ->arrayNode('mobile')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->performNoDeepMerging()
+                            ->children()
+                                ->scalarNode('path')
+                                    ->info('path to mobile controllers')
+                                ->end()
+                                ->arrayNode('routes')
+                                    ->beforeNormalization()->ifString()->then(function ($v) { return array($v); })->end()
+                                    ->prototype('scalar')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                        ->arrayNode('tablet')
+                            ->addDefaultsIfNotSet()
+                            ->canBeUnset()
+                            ->performNoDeepMerging()
+                            ->children()
+                                ->scalarNode('path')
+                                    ->info('path to tablet controllers')
+                                    ->defaultValue('')
+                                ->end()
+                                ->arrayNode('routes')
+                                    ->beforeNormalization()->ifString()->then(function ($v) { return array($v); })->end()
+                                    ->prototype('scalar')->end()
+                                ->end()
+                            ->end()
+                        ->end()
+                    ->end()
+                ->end()
+            ->end();
+
         return $treeBuilder;
     }
 }

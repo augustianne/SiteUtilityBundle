@@ -24,5 +24,14 @@ class SiteUtilityExtension extends Extension
 
         $loader = new Loader\YamlFileLoader($container, new FileLocator(__DIR__.'/../Resources/config'));
         $loader->load('services.yml');
+
+        $container->setParameter('site_utility.device_detection', $config['device_detection']);
+        $container->setParameter('site_utility.device_detection.tablet_as_mobile', $config['device_detection']['tablet_as_mobile']);
+        $container->setParameter('site_utility.device_detection.mobile', $config['device_detection']['mobile']);
+        $container->setParameter('site_utility.device_detection.mobile.path', $config['device_detection']['mobile']['path']);
+        $container->setParameter('site_utility.device_detection.mobile.routes', $config['device_detection']['mobile']['routes']);
+        $container->setParameter('site_utility.device_detection.tablet', $config['device_detection']['tablet']);
+        $container->setParameter('site_utility.device_detection.tablet.path', $config['device_detection']['tablet']['path']);
+        $container->setParameter('site_utility.device_detection.tablet.routes', $config['device_detection']['tablet']['routes']);
     }
 }
