@@ -25,6 +25,9 @@ class RandomCharacterGenerator
     const ALPHA_NUMERIC = 1;
     const ALPHA_NUMERIC_LOWERCASE = 2;
     const ALPHA_NUMERIC_UPPERCASE = 3;
+    const NUMERIC = 4;
+    const ALPHA_LOWERCASE = 5;
+    const ALPHA_UPPERCASE = 6;
     
     private $characterSet = array(
         self::ALPHA_NUMERIC => array(
@@ -39,6 +42,15 @@ class RandomCharacterGenerator
         self::ALPHA_NUMERIC_LOWERCASE => array(
             '0','1','2','3','4','5','6','7','8','9',
             'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+        ),
+        self::NUMERIC => array(
+            '0','1','2','3','4','5','6','7','8','9'
+        ),
+        self::ALPHA_LOWERCASE => array(
+            'a','b','c','d','e','f','g','h','i','j','k','l','m','n','o','p','q','r','s','t','u','v','w','x','y','z'
+        ),
+        self::ALPHA_UPPERCASE => array(
+            'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'
         )
     );
 

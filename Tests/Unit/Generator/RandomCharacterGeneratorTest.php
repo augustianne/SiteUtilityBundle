@@ -56,6 +56,33 @@ class RandomCharacterGeneratorTest extends \PHPUnit_Framework_TestCase
 		);
 	}
 
+	public function getInputNumeric()
+	{
+		return array(
+			array(7, RandomCharacterGenerator::NUMERIC),
+			array(10, RandomCharacterGenerator::NUMERIC),
+			array(5, RandomCharacterGenerator::NUMERIC)
+		);
+	}
+
+	public function getInputAlphaUpperCase()
+	{
+		return array(
+			array(7, RandomCharacterGenerator::ALPHA_UPPERCASE),
+			array(10, RandomCharacterGenerator::ALPHA_UPPERCASE),
+			array(5, RandomCharacterGenerator::ALPHA_UPPERCASE)
+		);
+	}
+
+	public function getInputAlphaLowerCase()
+	{
+		return array(
+			array(7, RandomCharacterGenerator::ALPHA_LOWERCASE),
+			array(10, RandomCharacterGenerator::ALPHA_LOWERCASE),
+			array(5, RandomCharacterGenerator::ALPHA_LOWERCASE)
+		);
+	}
+
 	/**
      * @covers Site\UtilityBundle\Generator\RandomCharacterGenerator::generate
      * @dataProvider getInput
@@ -92,5 +119,43 @@ class RandomCharacterGeneratorTest extends \PHPUnit_Framework_TestCase
 		$this->assertEquals(strtoupper($randomString), $randomString);
 		$this->assertEquals($length, strlen($randomString));
 		$this->assertTrue(ctype_alnum($randomString));
+	}
+
+	/**
+     * @covers Site\UtilityBundle\Generator\RandomCharacterGenerator::generate
+     * @dataProvider getInputNumeric
+     */
+	public function testGenerateNumeric($length, $type)
+	{
+		$randomString = $this->sut->generate($length, $type);
+		
+		$this->assertEquals($length, strlen($randomString));
+		$this->assertTrue(ctype_digit($randomString));
+	}
+
+	/**
+     * @covers Site\UtilityBundle\Generator\RandomCharacterGenerator::generate
+     * @dataProvider getInputAlphaUpperCase
+     */
+	public function testGenerateAlphaUpperCase($length, $type)
+	{
+		$randomString = $this->sut->generate($length, $type);
+		
+		$this->assertEquals($length, strlen($randomString));
+		$this->assertEquals(strtoupper($randomString), $randomString);
+		$this->assertTrue(ctype_alpha($randomString));
+	}
+
+	/**
+     * @covers Site\UtilityBundle\Generator\RandomCharacterGenerator::generate
+     * @dataProvider getInputAlphaLowerCase
+     */
+	public function testGenerateAlphaLowerCase($length, $type)
+	{
+		$randomString = $this->sut->generate($length, $type);
+		
+		$this->assertEquals(strtolower($randomString), $randomString);
+		$this->assertEquals($length, strlen($randomString));
+		$this->assertTrue(ctype_alpha($randomString));
 	}
 }
