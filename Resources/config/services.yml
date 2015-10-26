@@ -11,7 +11,7 @@ services:
         class: Site\UtilityBundle\Encoder\SlugEncoder
 
     yan.encoder.twitter_handler:
-        class: Site\UtilityBundle\Encoder\TwitterHandlerEncoder
+        class: Site\UtilityBundle\Encoder\TwitterHandleEncoder
 
 ## -- Generators -- ##
     yan.generator.random_character:
