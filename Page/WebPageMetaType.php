@@ -39,6 +39,13 @@ class WebPageMetaType
     private static $validMetaTypes = array(
         self::META_TITLE,
         self::META_DESCRIPTION,
+        self::META_TWITTER_CARD,
+        self::META_TWITTER_SITE,
+        self::META_TWITTER_CREATOR,
+        self::META_TWITTER_TITLE,
+        self::META_TWITTER_DESCRIPTION,
+        self::META_TWITTER_IMAGE,
+        self::META_TWITTER_URL
     );
     
     private static $validMetaPropertyTypes = array(
@@ -46,7 +53,7 @@ class WebPageMetaType
         self::OG_META_PROPERTY_DESCRIPTION,
         self::OG_META_PROPERTY_SITE_NAME,
         self::OG_META_PROPERTY_IMAGE,
-        self::OG_META_PROPERTY_URL,
+        self::OG_META_PROPERTY_URL
     );
 
     /**
