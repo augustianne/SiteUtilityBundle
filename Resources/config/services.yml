@@ -10,7 +10,7 @@ services:
     yan.encoder.slug:
         class: Site\UtilityBundle\Encoder\SlugEncoder
 
-    yan.encoder.twitter_handler:
+    yan.encoder.twitter_handle:
         class: Site\UtilityBundle\Encoder\TwitterHandleEncoder
 
 ## -- Generators -- ##
