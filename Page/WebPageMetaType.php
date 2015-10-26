@@ -22,6 +22,14 @@ class WebPageMetaType
     const META_TITLE = 'title';
     const META_DESCRIPTION = 'description';
     
+    const META_TWITTER_CARD = 'twitter:card';
+    const META_TWITTER_SITE = 'twitter:site';
+    const META_TWITTER_CREATOR = 'twitter:creator';
+    const META_TWITTER_TITLE = 'twitter:title';
+    const META_TWITTER_DESCRIPTION = 'twitter:description';
+    const META_TWITTER_IMAGE = 'twitter:image';
+    const META_TWITTER_URL = 'twitter:url';
+    
     const OG_META_PROPERTY_SITE_NAME = 'og:site_name';
     const OG_META_PROPERTY_TITLE = 'og:title';
     const OG_META_PROPERTY_DESCRIPTION = 'og:description';

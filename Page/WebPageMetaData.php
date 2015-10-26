@@ -20,7 +20,7 @@ use Site\UtilityBundle\Page\WebPageMetaType;
  *
  * @author  Yan Barreta
  */
-class WebPageMetaData
+abstract class WebPageMetaData
 {
     private $metaData = array();
     private $metaPropertyData = array();
@@ -87,4 +87,8 @@ class WebPageMetaData
     {
         return $this->metaPropertyData;
     }
+
+    abstract public function setDefaultMetaData();
+
+    abstract public function setDefaultMetaPropertyData();
 }
