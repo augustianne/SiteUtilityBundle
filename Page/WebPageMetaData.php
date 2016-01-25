@@ -74,7 +74,7 @@ abstract class WebPageMetaData
     
     public function getMetaPropertyData($metaPropertyType)
     {
-        if (!WebPageMetaType::isValidMetaType($metaPropertyType)) {
+        if (!WebPageMetaType::isValidMetaPropertyType($metaPropertyType)) {
             throw new Exception('Invalid meta property type: '.$metaPropertyType);
         }
         if (isset($this->metaPropertyData[$metaPropertyType])) {
