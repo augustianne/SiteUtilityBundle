@@ -21,6 +21,7 @@ class WebPageMetaType
 
     const META_TITLE = 'title';
     const META_DESCRIPTION = 'description';
+    const META_ROBOTS = 'robots';
     
     const META_TWITTER_CARD = 'twitter:card';
     const META_TWITTER_SITE = 'twitter:site';
@@ -39,6 +40,7 @@ class WebPageMetaType
     private static $validMetaTypes = array(
         self::META_TITLE,
         self::META_DESCRIPTION,
+        self::META_ROBOTS,
         self::META_TWITTER_CARD,
         self::META_TWITTER_SITE,
         self::META_TWITTER_CREATOR,
