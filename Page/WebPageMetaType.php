@@ -31,16 +31,22 @@ class WebPageMetaType
     const META_TWITTER_IMAGE = 'twitter:image';
     const META_TWITTER_URL = 'twitter:url';
     
+    const META_PROPERTY_FB_APP_ID = 'fb:app_id';
+
     const OG_META_PROPERTY_SITE_NAME = 'og:site_name';
     const OG_META_PROPERTY_TITLE = 'og:title';
     const OG_META_PROPERTY_DESCRIPTION = 'og:description';
+    const OG_META_PROPERTY_LOCALE = 'og:locale';
     const OG_META_PROPERTY_IMAGE = 'og:image';
+    const OG_META_PROPERTY_TYPE = 'og:type';
     const OG_META_PROPERTY_URL = 'og:url';
+    const OG_META_PROPERTY_VIDEO = 'og:video';
 
     const META_PROPERTY_ARTICLE_AUTHOR = 'article:author';
     const META_PROPERTY_ARTICLE_PUBLISHED_TIME = 'article:published_time';
     const META_PROPERTY_ARTICLE_PUBLISHER = 'article:publisher';
     const META_PROPERTY_ARTICLE_SECTION = 'article:section';
+    const META_PROPERTY_ARTICLE_TAG = 'article:tag';
 
     private static $validMetaTypes = array(
         self::META_TITLE,
@@ -56,16 +62,21 @@ class WebPageMetaType
     );
     
     private static $validMetaPropertyTypes = array(
+        self::META_PROPERTY_FB_APP_ID,
         self::OG_META_PROPERTY_TITLE,
         self::OG_META_PROPERTY_DESCRIPTION,
-        self::OG_META_PROPERTY_SITE_NAME,
         self::OG_META_PROPERTY_IMAGE,
+        self::OG_META_PROPERTY_LOCALE,
+        self::OG_META_PROPERTY_SITE_NAME,
+        self::OG_META_PROPERTY_TYPE,
         self::OG_META_PROPERTY_URL,
+        self::OG_META_PROPERTY_VIDEO,
 
         self::META_PROPERTY_ARTICLE_AUTHOR,
         self::META_PROPERTY_ARTICLE_PUBLISHED_TIME,
         self::META_PROPERTY_ARTICLE_PUBLISHER,
-        self::META_PROPERTY_ARTICLE_SECTION
+        self::META_PROPERTY_ARTICLE_SECTION,
+        self::META_PROPERTY_ARTICLE_TAG
     );
 
     /**
