@@ -37,6 +37,11 @@ class WebPageMetaType
     const OG_META_PROPERTY_IMAGE = 'og:image';
     const OG_META_PROPERTY_URL = 'og:url';
 
+    const META_PROPERTY_ARTICLE_AUTHOR = 'article:author';
+    const META_PROPERTY_ARTICLE_PUBLISHED_TIME = 'article:published_time';
+    const META_PROPERTY_ARTICLE_PUBLISHER = 'article:publisher';
+    const META_PROPERTY_ARTICLE_SECTION = 'article:section';
+
     private static $validMetaTypes = array(
         self::META_TITLE,
         self::META_DESCRIPTION,
@@ -55,7 +60,12 @@ class WebPageMetaType
         self::OG_META_PROPERTY_DESCRIPTION,
         self::OG_META_PROPERTY_SITE_NAME,
         self::OG_META_PROPERTY_IMAGE,
-        self::OG_META_PROPERTY_URL
+        self::OG_META_PROPERTY_URL,
+
+        self::META_PROPERTY_ARTICLE_AUTHOR,
+        self::META_PROPERTY_ARTICLE_PUBLISHED_TIME,
+        self::META_PROPERTY_ARTICLE_PUBLISHER,
+        self::META_PROPERTY_ARTICLE_SECTION
     );
 
     /**
