@@ -74,7 +74,9 @@ class EnglishGrammarExtensionTest extends \PHPUnit_Framework_TestCase
 			array("quiz", "quizzes", null),
 			array("dog", "dogs", null),
 			array("cat", "cats", null),
-			array("man", "men", "men")
+			array("man", "men", "men"),
+			array("ox", "oxen", "oxen"),
+			array("has", "have", "have")
 		);
 	}
 
