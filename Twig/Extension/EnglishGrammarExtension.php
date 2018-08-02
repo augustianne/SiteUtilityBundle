@@ -61,6 +61,11 @@ class EnglishGrammarExtension extends Twig_Extension
         $originalString = $noun;
 
         if ($quantity > 1) {
+
+            if (!is_null($alternatePlural)) {
+                return $alternatePlural;
+            }
+
             // words ending in is change to es
             $noun = preg_replace('/(\w*)(is)$/', '$1es', $noun);
             // add s if word ends in vowel+y
@@ -76,9 +81,10 @@ class EnglishGrammarExtension extends Twig_Extension
             }
         }
 
-        return (("s" == substr($noun, -1) || 1 >= $quantity) 
-            ? $noun : ((!is_null($alternatePlural)) 
-                ? $alternatePlural : sprintf("%ss", $noun)));
+        return (
+            ("s" == substr($noun, -1) || 1 >= $quantity) 
+            ? $noun : sprintf("%ss", $noun)
+        );
     }
 
     /**
