@@ -124,13 +124,16 @@ class EnglishGrammarExtensionTest extends \PHPUnit_Framework_TestCase
 	public function conjunctProvider()
 	{
 		return array(
-			array(array("me", "myself", "I"), "me, myself and I"),
-			array(array("Yan"), "Yan"),
-			array(array("Kristal", "Nick"), "Kristal and Nick"),
-			array(array("Naldz", "Giging", "Logan"), "Naldz, Giging and Logan"),
-			array(array("Naldz", "Giging", "Logan", "Nick", "Kristal", "Yan", "Yen"), "Naldz, Giging, Logan, Nick, Kristal, Yan and Yen"),
-			array(array("Daf", "Thea"), "Daf and Thea"),
-			array(array("Jikky"), "Jikky"),
+			array(array("me", "myself", "I"), null, "me, myself and I"),
+			array(array("Yan"), null, "Yan"),
+			array(array("Kristal", "Nick"), null, "Kristal and Nick"),
+			array(array("Naldz", "Giging", "Logan"), null, "Naldz, Giging and Logan"),
+			array(array("Naldz", "Giging", "Logan", "Nick", "Kristal", "Yan", "Yen"), null, "Naldz, Giging, Logan, Nick, Kristal, Yan and Yen"),
+			array(array("Daf", "Thea"), null, "Daf and Thea"),
+			array(array("Jikky"), null, "Jikky"),
+			array(array("Jikky", "Arellano", "Sinday"), "or", "Jikky, Arellano or Sinday"),
+			array(array("Jikky", "Arellano"), "or", "Jikky or Arellano"),
+			array(array("Jikky", "Arellano"), "&", "Jikky & Arellano"),
 		);
 	}
 
@@ -138,9 +141,9 @@ class EnglishGrammarExtensionTest extends \PHPUnit_Framework_TestCase
      * @covers Site\UtilityBundle\Twig\Extension\EnglishGrammarExtension::joinWords
      * @dataProvider conjunctProvider
      */
-	public function testConjunct($words, $result)
+	public function testConjunct($words, $conjunctive, $result)
 	{
-		$this->assertEquals($result, $this->sut->conjunct($words));
+		$this->assertEquals($result, $this->sut->conjunct($words, $conjunctive));
 	}
 
 

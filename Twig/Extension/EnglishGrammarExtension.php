@@ -137,11 +137,16 @@ class EnglishGrammarExtension extends Twig_Extension
     /**
      * Formats words into a grammatically correct conjunction of the given array of words
      *
-     * @param String $words
+     * @param String $words - words to concatenate
+     * @param String $conjunctive - word used to concatenate last word
      * @return string grammatically formatted conjunction of the input
      */
-    public function conjunct($words)
+    public function conjunct($words, $conjunctive=null)
     {
+        if (is_null($conjunctive)) {
+            $conjunctive = 'and';
+        }
+
         if (!is_array($words)) {
             throw new Exception('Invalid input. Make sure you input an array of words');
         }
@@ -153,7 +158,7 @@ class EnglishGrammarExtension extends Twig_Extension
         $lastWord = array_pop($words);
         $joinedWords = implode(', ', $words);
 
-        return sprintf("%s and %s", $joinedWords, $lastWord);
+        return sprintf("%s %s %s", $joinedWords, $conjunctive, $lastWord);
     }
 
     /**
